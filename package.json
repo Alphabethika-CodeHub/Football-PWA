@@ -1,0 +1,14 @@
+{
+  "name": "sub-pwa-2-v2-using-workbox",
+  "version": "1.0.0",
+  "description": "Submission 3 Football PWA Using Workbox - Daffa Nabil H",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daffa Nabil H",
+  "license": "ISC",
+  "dependencies": {
+    "web-push": "^3.4.4"
+  }
+}

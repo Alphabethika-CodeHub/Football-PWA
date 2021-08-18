@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <title>Football PWA</title>
+    <link rel="shortcut icon" href="img/league-icon.png">
+    <link rel="apple-touch-icon" href="img/icon2-ios.png">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Metaname -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Football PWA">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/fontawesome/fontawesome.min.css">    
+    <link rel="stylesheet" href="css/fontawesome/all.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/costum-style.css">
+
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="teal lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo" id="logo-container">Football</a>
+        <a href="#" class="sidenav-trigger" data-target="nav-mobile"><i class="fas fa-list-ul"></i></a>
+        <ul class="topnav right hide-on-med-and-down"></ul>
+        <ul style="background-color: #393b44;" class="sidenav" id="nav-mobile"></ul>
+      </div>
+    </nav>
+    <!-- Nav -->
+
+    <!-- Body Content -->
+    <div class="container" id="body-content"></div>
+
+    <!-- Footer -->
+    <footer class="page-footer" style="background-color: #393b44;">
+        <div class="container">
+          <div class="center-align">
+            © 2020 Copyright Submission 2 - Daffa Nabil H
+          </div>
+        </div>
+      <br>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Script -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/nav.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/idb.js"></script>
+    <script type="text/javascript" src="js/db.js"></script>
+    
+    <!-- Custom Script -->
+    <script type="text/javascript" src="js/latest_match.js"></script>
+    <script type="text/javascript" src="js/upcoming_match.js"></script>
+    <script type="text/javascript" src="js/date-convert.js"></script>
+    <script type="text/javascript" src="js/standings_league.js"></script>
+    
+    <!-- Service Worker -->
+    <script type="text/javascript" src="js/sw-register.js"></script>    
+
+</body>
+</html>

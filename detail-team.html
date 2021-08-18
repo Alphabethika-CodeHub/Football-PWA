@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Football PWA</title>
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Metaname -->
+    <meta name="theme-color" content="#">
+    <meta name="description" content="Football PWA">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="css/fontawesome/all.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/costum-style.css">
+
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="teal lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo" id="logo-container">Football</a>          
+          <a href="javascrit:void(0)" onclick="javascript:window.history.back(-1);return false;" class="sidenav-trigger" data-target="nav-mobile"><i class="fas fa-arrow-left"></i></a>
+          <ul class="topnav right hide-on-small-only"><a href="javascrit:void(0)" onclick="javascript:window.history.back(-1);return false;"><i class="fas fa-arrow-left"></i></a></ul>
+          <ul class="sidenav" id="nav-mobile"></ul>
+        </div>
+      </nav>
+    <!-- Nav -->
+
+    <!-- Body Content -->
+    <div class="container" id="body-content">
+
+        <h3 class="center-align white-text">Football Club</h3>
+        <hr>
+
+        <div class="card mt-3">
+            <div class="card-content">
+                <div class="center-align">
+                    <img id="club-logo" width="50%" alt="club-logo">
+                </div>
+
+                <ul class="collection with-header">
+                    <li class="collection-header center-align"><h4 id="club-name"></h4></li>
+                    <li class="collection-item center-align"><strong>Name :</strong> <span id="name"></span></li>
+                    <li class="collection-item center-align"><strong>Short Name :</strong> <span id="shortName" ></span></li>
+                    <li class="collection-item center-align"><strong>TLA :</strong> <span id="tla" ></span></li>
+                    <li class="collection-item center-align"><strong>Address :</strong> <span id="address" ></span></li>
+                    <li class="collection-item center-align"><strong>Phone :</strong> <span id="phone" ></span></li>
+                    <li class="collection-item center-align"><strong>Website :</strong> <span id="website" ></span></li>
+                    <li class="collection-item center-align"><strong>Email :</strong> <span id="email" ></span></li>
+                    <li class="collection-item center-align"><strong>Founded :</strong> <span id="founded" ></span></li>
+                    <li class="collection-item center-align"><strong>Club Colors :</strong> <span id="club-colors" ></span></li>
+                    <li class="collection-item center-align"><strong>Venue :</strong> <span id="venue" ></span></li>
+                  </ul>
+
+            </div>
+        </div>
+
+        <h3 class="center-align white-text">Squad Team</h3>
+        <hr>
+
+        <div class="card mt-3">
+            <div class="card-content">
+                <div id="squad">
+                    <div class="center-align">
+                        <div id="preloader" class="preloader-wrapper active mt-3 mb-3">
+                            <div class="spinner-layer spinner-green-only">
+                              <div class="circle-clipper left">
+                                <div class="circle"></div>
+                              </div>
+                              <div class="gap-patch">
+                                <div class="circle"></div>
+                              </div>
+                              <div class="circle-clipper right">
+                                <div class="circle"></div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" id="save">
+        <i onclick="M.toast({html: 'Team Ini Berhasil Disimpan.'})" class="fas fa-save"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer" style="background-color: #393b44;">
+      <div class="container">
+        <div class="center-align">
+          © 2020 Copyright Submission 2 - Daffa Nabil H
+        </div>
+      </div>
+      <br>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Script -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js">
+    </script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>    
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/idb.js"></script>
+    <script type="text/javascript" src="js/db.js"></script>    
+    
+    <!-- Custom Script -->
+    <script type="text/javascript" src="js/latest_match.js"></script>
+    <script type="text/javascript" src="js/upcoming_match.js"></script>
+    <script type="text/javascript" src="js/date-convert.js"></script>
+    <script type="text/javascript" src="js/standings_league.js"></script>
+    <script type="text/javascript" src="js/detail_team_breakdown.js"></script>    
+
+    <!-- Service Worker -->
+    <script>
+
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker
+                    .register("/sw.js")
+                    .then(function () {
+                        console.log("Pendaftaran Service Worker Berhasil");
+                    })
+                    .catch(function () {
+                        console.log("Pendaftaran Service Worker Gagal");
+                    });
+            });
+        } else {
+            console.log("Service Worker Belum Didukung Browser Ini.");
+        }             
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let urlParams = new URLSearchParams(window.location.search);
+            let isFromSaved = urlParams.get("saved");
+
+            let save = document.getElementById("save");
+
+            if (isFromSaved) {            
+                save.style.display = 'none';                            
+                getSavedTeamById();
+            } else {
+                var item = getDetailTeamById();
+            }
+
+            save.onclick = function() {
+                console.log("Tombol FAB di klik.");
+                item.then(function(team) {
+                saveForLater(team);
+                });
+            };
+         });         
+    </script>
+
+</body>
+</html>
